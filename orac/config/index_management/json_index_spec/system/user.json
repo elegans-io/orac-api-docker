@@ -1,0 +1,39 @@
+{
+  "mappings": {
+    "user": {
+      "properties": {
+        "id": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        },
+        "password": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        },
+        "salt": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        },
+        "permissions": {
+          "type": "nested",
+          "properties": {
+            "index": {
+              "type": "keyword",
+              "store": true,
+              "index": true
+            },
+            "permission": {
+              "type": "keyword",
+              "store": true,
+              "index": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

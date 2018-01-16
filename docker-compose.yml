@@ -1,0 +1,50 @@
+version: "3.2"
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    restart: unless-stopped
+    command: elasticsearch
+    ports:
+      - "0.0.0.0:9200:9200"
+      - "0.0.0.0:9300:9300"
+    expose:
+      - "9200"
+      - "9300"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/config:/usr/share/elasticsearch/config
+      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
+    environment:
+      - MAX_LOCKED_MEMORY=unlimited
+
+  csrec:
+    image: elegansio/csrec-webapp:1.0.0
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    command: ["/bin/bash", "-c", "source activate csrec && exec csrec_webapp.py --port=8000"]
+    ports:
+      - "0.0.0.0:8000:8000"
+
+  orac:
+    image: java:8
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    command: ["/orac/scripts/utils/wait-for-it.sh", "orac-elasticsearch", "9200", "10", "/orac/bin/orac-api"]
+    volumes:
+      - ./orac:/orac
+    ports:
+      - "0.0.0.0:8888:8888"
+      - "0.0.0.0:8443:8443"
+    links:
+      - "elasticsearch:orac-elasticsearch"
+      - "csrec:csrec"
+

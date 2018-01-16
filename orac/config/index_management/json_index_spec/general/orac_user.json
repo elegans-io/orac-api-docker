@@ -1,0 +1,94 @@
+{
+  "mappings": {
+    "user": {
+      "properties": {
+        "id": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        },
+        "name": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        },
+        "email": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        },
+        "phone": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        },
+        "numerical_properties": {
+          "type": "nested",
+          "properties": {
+            "key": {
+              "type": "keyword",
+              "store": true,
+              "index": true
+            },
+            "value": {
+              "type": "double",
+              "store": true,
+              "index": true
+            }
+          }
+        },
+        "string_properties": {
+          "type": "nested",
+          "properties": {
+            "key": {
+              "type": "keyword",
+              "store": true,
+              "index": true
+            },
+            "value": {
+              "type": "keyword",
+              "store": true,
+              "index": true
+            }
+          }
+        },
+        "timestamp_properties": {
+          "type": "nested",
+          "properties": {
+            "key": {
+              "type": "keyword",
+              "store": true,
+              "index": true
+            },
+            "value": {
+              "type": "date",
+              "format": "epoch_millis",
+              "store": true,
+              "index": true
+            }
+          }
+        },
+        "geopoint_properties": {
+          "type": "nested",
+          "properties": {
+            "key": {
+              "type": "keyword",
+              "store": true,
+              "index": true
+            },
+            "value": {
+              "type": "geo_point",
+              "store": true,
+              "index": true
+            }
+          }
+        },
+        "tag_properties": {
+          "type": "keyword",
+          "store": true,
+          "index": true
+        }
+      }
+    }
+  }
+}
