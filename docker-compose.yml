@@ -31,9 +31,11 @@ services:
       - "0.0.0.0:8000:8000"
 
   orac:
-    image: elegansio/orac-api:1.0.0-rc0
+    image: elegansio/orac-api:1.0.0-rc1
     restart: unless-stopped
     command: ["/orac/scripts/utils/wait-for-it.sh", "orac-elasticsearch", "9200", "10", "/orac/bin/orac-api"]
+    volumes:
+      - ./orac/config:/orac/config
     ports:
       - "0.0.0.0:8888:8888"
       - "0.0.0.0:8443:8443"
