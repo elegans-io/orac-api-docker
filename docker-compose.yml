@@ -2,7 +2,7 @@ version: "3.2"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
     restart: unless-stopped
     command: elasticsearch
     ports:
@@ -31,7 +31,7 @@ services:
       - "0.0.0.0:8000:8000"
 
   orac:
-    image: elegansio/orac-api:1.0.0-rc1
+    image: elegansio/orac-api:1.0.0-rc3
     restart: unless-stopped
     command: ["/orac/scripts/utils/wait-for-it.sh", "orac-elasticsearch", "9200", "10", "/orac/bin/orac-api"]
     volumes:
